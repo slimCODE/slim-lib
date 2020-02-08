@@ -1,0 +1,52 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:local="using:Seclusion.Themes"
+					xmlns:views="using:Seclusion.Views"
+					xmlns:slimb="using:slimCODE.Views.Behaviors"
+					xmlns:slimcv="using:slimCODE.Views.Converters">
+
+	<slimcv:FromAnyToStringConverter x:Key="anyToStringConverter" />
+
+	<Style TargetType="views:CounterControl">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="views:CounterControl">
+					<Grid Background="{TemplateBinding Background}"
+						  BorderBrush="{TemplateBinding BorderBrush}"
+						  BorderThickness="{TemplateBinding BorderThickness}"
+						  slimb:GridHelper.Columns="*,2*,*"
+						  slimb:GridHelper.Rows="*,2*">
+						<TextBlock Grid.ColumnSpan="3"
+								   Text="{TemplateBinding Title}"
+								   HorizontalAlignment="Center"
+								   VerticalAlignment="Bottom"/>
+
+						<Button x:Name="PART_DecreaseButton"
+								Grid.Row="1"
+								VerticalAlignment="Top">
+							<Button.Content>
+								<SymbolIcon Symbol="Remove"
+											HorizontalAlignment="Center"/>
+							</Button.Content>
+						</Button>
+
+						<Button x:Name="PART_IncreaseButton"
+								Grid.Row="1"
+								Grid.Column="2"
+								VerticalAlignment="Top">
+							<SymbolIcon Symbol="Add"
+										HorizontalAlignment="Center"/>
+						</Button>
+
+						<TextBlock Grid.Column="1"
+								   Grid.Row="1"
+								   Text="{Binding Value, Converter={StaticResource anyToStringConverter}, ConverterParameter='{}{0:N0}', RelativeSource={RelativeSource Mode=TemplatedParent}}"
+								   HorizontalAlignment="Center"
+								   VerticalAlignment="Top" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+</ResourceDictionary>
