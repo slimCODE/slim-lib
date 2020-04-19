@@ -12,7 +12,9 @@
     CloseButtonText="Whatever"
     PrimaryButtonCommand="{Binding [GoodCommand]}"
     SecondaryButtonCommand="{Binding [FineCommand]}"
-    CloseButtonCommand="{Binding [WhateverCommand]}">
+    CloseButtonCommand="{Binding [WhateverCommand]}"
+    IsPrimaryButtonEnabled="{Binding [CanGoodCommand]}"
+    IsSecondaryButtonEnabled="{Binding [CanFineCommand]}">
 
     <StackPanel>
         <TextBlock>This is a very simple example of how to open a content dialog from your view-model.</TextBlock>

@@ -39,7 +39,7 @@ namespace Seclusion
 
         protected override void OnRegisterViewModels(IViewModelController viewModelController)
         {
-            viewModelController.RegisterViewModel(typeof(GamePage), () => new GameViewModel());
+            viewModelController.RegisterViewModel(typeof(GamePage), dispatcher => new GameViewModel());
         }
 
         protected override void OnInitialNavigation(LaunchActivatedEventArgs args, INavigationController navigation)

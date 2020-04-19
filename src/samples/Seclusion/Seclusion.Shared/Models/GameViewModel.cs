@@ -63,13 +63,13 @@ namespace Seclusion.Models
                 () => ObservableLogic.ObserveWouldPlayLand(stepProperty, enemyInHandProperty));
 
             var landsViewModel = this
-                .CreateProperty(
+                .AddChildProperty(
                     "LandsViewModel",
-                    this.AddChild(new LandsViewModel(
+                    new LandsViewModel(
                         () => ObservableLogic.ObserveReset(stepProperty),
                         () => ObservableLogic.ObserveUntap(stepResultProperty),
-                        () => ObservableLogic.ObservePlayLand(wouldPlayLandProperty, stepResultProperty))))
-                .Latest;
+                        () => ObservableLogic.ObservePlayLand(wouldPlayLandProperty, stepResultProperty),
+                        this));
 
             var wouldPlayCreatureProperty = this.CreateProperty(
                 "WouldPlayCreature",
@@ -77,19 +77,20 @@ namespace Seclusion.Models
                     stepProperty,
                     enemyInHandProperty,
                     landsViewModel.UntappedLandsObservable.Select(lands => lands.Count()),
-                    ObservableLogic.ObserveUntap(stepResultProperty)));
+                    ObservableLogic.ObserveUntap(stepResultProperty),
+                    this));
 
             this.CreateProperty(
                 "Message", 
                 () => ObservableLogic.ObserveMessage(stepProperty, wouldPlayLandProperty, wouldPlayCreatureProperty));
 
             var creaturesViewModel = this
-                .CreateProperty(
+                .AddChildProperty(
                     "CreaturesViewModel",
-                    this.AddChild(new CreaturesViewModel(
+                    new CreaturesViewModel(
                         () => ObservableLogic.ObserveReset(stepProperty),
-                        () => ObservableLogic.ObservePlayCreature(wouldPlayCreatureProperty, stepResultProperty))))
-                .Latest;
+                        () => ObservableLogic.ObservePlayCreature(wouldPlayCreatureProperty, stepResultProperty),
+                        this));
         }
     }
 }

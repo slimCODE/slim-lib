@@ -11,13 +11,15 @@ using slimCODE.Models;
 
 namespace Seclusion.Models
 {
-    public class CreaturesViewModel : BaseViewModel
+    public class CreaturesViewModel : BaseChildViewModel
     {
         private Random _random = new Random();
 
         public CreaturesViewModel(
             Func<IObservable<Unit>> resetSelector, 
-            Func<IObservable<CreatureViewModel>> playCreatureSelector)
+            Func<IObservable<CreatureViewModel>> playCreatureSelector,
+            BaseViewModel parent)
+            : base (parent)
         {
             this.CreateCollectionProperty<CreatureViewModel>(
                 "Creatures",

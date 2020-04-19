@@ -274,57 +274,65 @@ namespace slimCODE.Extensions
         /// <summary>
         /// Creates an <see cref="ObservableValue{TValue}"/> available as a property via data binding, 
         /// and affected by a command also available via data binding, with an observable that determines
-        /// if it can be executed.
+        /// if it can be executed. You can optionally expose that observable via a "Can" + commandName
+        /// property.
         /// </summary>
         /// <typeparam name="TValue"></typeparam>
         /// <param name="viewModel"></param>
         /// <param name="propertyName"></param>
-        /// <param name="command1Name"></param>
+        /// <param name="commandName"></param>
         /// <param name="inputObservableSelector"></param>
+        /// <param name="canExecuteObservable"></param>
         /// <param name="initialValue"></param>
+        /// <param name="includeCanProperty"></param>
         /// <returns></returns>
         public static ObservableValue<TValue> CreateActiveProperty<TValue>(
             this BaseViewModel viewModel,
             string propertyName,
-            string command1Name,
+            string commandName,
             Func<IObservable<Unit>, IObservable<TValue>> inputObservableSelector,
             IObservable<bool> canExecuteObservable,
-            TValue initialValue = default)
+            TValue initialValue = default,
+            bool includeCanProperty = false)
         {
-            var command1 = viewModel.CreateObservableCommand<Unit>(command1Name, canExecuteObservable);
+            var command = viewModel.CreateObservableCommand<Unit>(commandName, canExecuteObservable, includeCanProperty);
 
             return viewModel.CreateProperty<TValue>(
                 propertyName,
-                () => inputObservableSelector(command1),
+                () => inputObservableSelector(command),
                 initialValue);
         }
 
         /// <summary>
         /// Creates an <see cref="ObservableValue{TValue}"/> available as a property via data binding, 
         /// and affected by a command accepting a <typeparamref name="TParam"/> parameter also 
-        /// available via data binding, with an observable that determines if it can be executed.
+        /// available via data binding, with an observable that determines if it can be executed. You 
+        /// can optionally expose that observable via a "Can" + commandName property.
         /// </summary>
         /// <typeparam name="TValue"></typeparam>
         /// <typeparam name="TParam"></typeparam>
         /// <param name="viewModel"></param>
         /// <param name="propertyName"></param>
-        /// <param name="command1Name"></param>
+        /// <param name="commandName"></param>
         /// <param name="inputObservableSelector"></param>
+        /// <param name="canExecuteObservable"></param>
         /// <param name="initialValue"></param>
+        /// <param name="includeCanProperty"></param>
         /// <returns></returns>
         public static ObservableValue<TValue> CreateActiveProperty<TValue, TParam>(
             this BaseViewModel viewModel,
             string propertyName,
-            string command1Name,
+            string commandName,
             Func<IObservable<TParam>, IObservable<TValue>> inputObservableSelector,
             IObservable<bool> canExecuteObservable,
-            TValue initialValue = default)
+            TValue initialValue = default,
+            bool includeCanProperty = false)
         {
-            var command1 = viewModel.CreateObservableCommand<TParam>(command1Name, canExecuteObservable);
+            var command = viewModel.CreateObservableCommand<TParam>(commandName, canExecuteObservable, includeCanProperty);
 
             return viewModel.CreateProperty<TValue>(
                 propertyName,
-                () => inputObservableSelector(command1),
+                () => inputObservableSelector(command),
                 initialValue);
         }
 

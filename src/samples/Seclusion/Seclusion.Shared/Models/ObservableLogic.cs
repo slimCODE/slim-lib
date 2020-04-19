@@ -126,7 +126,8 @@ namespace Seclusion.Models
             IObservable<Step> stepObservable,
             IObservable<int> inHandObservable,
             IObservable<int> untappedLandsObservable,
-            IObservable<Unit> untapAllObservable)
+            IObservable<Unit> untapAllObservable,
+            BaseViewModel parent)
         {
             return Observable
                 .CombineLatest(
@@ -136,11 +137,11 @@ namespace Seclusion.Models
                 .SelectManyCancelPrevious(info => stepObservable
                     .SkipHot()
                     .Select(step => (step == Step.PlayCreatureBefore)
-                        ? WouldPlayCreature(info.InHand, info.Untapped, untapAllObservable)
+                        ? WouldPlayCreature(info.InHand, info.Untapped, untapAllObservable, parent)
                         : null));
         }
 
-        private static CreatureViewModel WouldPlayCreature(int inHand, int untapped, IObservable<Unit> untapAllObservable)
+        private static CreatureViewModel WouldPlayCreature(int inHand, int untapped, IObservable<Unit> untapAllObservable, BaseViewModel parent)
         {
             if ((untapped > 0) &&
                 (_random.Next(6) < _playCreatureChance[Math.Min(_playCreatureChance.Length - 1, inHand)]))
@@ -148,7 +149,7 @@ namespace Seclusion.Models
                 var power = _random.Next(untapped) + 1;
                 var abilities = _randomAbilities[_random.Next(6) + _random.Next(6)];
 
-                return new CreatureViewModel(untapAllObservable, power, power, abilities);
+                return new CreatureViewModel(untapAllObservable, power, power, parent, abilities);
             }
 
             return null;

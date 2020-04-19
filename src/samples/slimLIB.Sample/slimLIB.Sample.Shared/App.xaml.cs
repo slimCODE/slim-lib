@@ -40,7 +40,7 @@ namespace slimLIB.Sample
 
         protected override void OnRegisterViewModels(IViewModelController viewModels)
         {
-            viewModels.RegisterViewModel<MainPage, Models.MainPageViewModel>(() => new Models.MainPageViewModel(_hack));
+            viewModels.RegisterViewModel<MainPage, Models.MainPageViewModel>(_ => new Models.MainPageViewModel(_hack));
             viewModels.RegisterViewModel<MessageAndDialogExamplesPage, Models.MessageAndDialogExamplesPageViewModel>();
 
             // Just an example of global properties

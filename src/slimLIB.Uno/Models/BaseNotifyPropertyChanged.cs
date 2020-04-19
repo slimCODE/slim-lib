@@ -16,15 +16,17 @@ namespace slimCODE.Models
         private CoreDispatcher _dispatcher;
         private Action<string, PropertyChangedEventHandler> _propertyChanged;
 
-        protected BaseNotifyPropertyChanged()
+        protected BaseNotifyPropertyChanged(CoreDispatcher dispatcher = null)
         {
-            _propertyChanged = GetGenericNotifier();
-        }
-
-        protected BaseNotifyPropertyChanged(CoreDispatcher dispatcher)
-        {
-            _dispatcher = dispatcher;
-            _propertyChanged = GetDispatcherNotifier(dispatcher);
+            if (dispatcher == null)
+            {
+                _propertyChanged = GetGenericNotifier();
+            }
+            else
+            {
+                _dispatcher = dispatcher;
+                _propertyChanged = GetDispatcherNotifier(dispatcher);
+            }
         }
 
         /// <summary>

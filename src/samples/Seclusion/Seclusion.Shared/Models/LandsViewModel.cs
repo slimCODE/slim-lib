@@ -12,12 +12,14 @@ using slimCODE.Models;
 
 namespace Seclusion.Models
 {
-    public class LandsViewModel : BaseViewModel
+    public class LandsViewModel : BaseChildViewModel
     {
         public LandsViewModel(
             Func<IObservable<Unit>> resetSelector, 
             Func<IObservable<Unit>> untapAllSelector, 
-            Func<IObservable<Unit>> playLandSelector)
+            Func<IObservable<Unit>> playLandSelector,
+            BaseViewModel parent)
+            : base (parent)
         {
             var tapLands = this.CreateObservableCommand<int>("TapLands");
 
@@ -26,7 +28,7 @@ namespace Seclusion.Models
                 proxy => Observable
                     .Merge(
                         resetSelector().Do(_ => proxy.Clear()),
-                        playLandSelector().Do(_ => proxy.Add(this.AddChild(new LandViewModel(untapAllSelector)))),
+                        playLandSelector().Do(_ => proxy.Add(this.AddChild(new LandViewModel(untapAllSelector, this)))),
                         this.ObserveTapLands(tapLands)
                     )
             );

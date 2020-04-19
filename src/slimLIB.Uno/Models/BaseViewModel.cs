@@ -24,21 +24,10 @@ namespace slimCODE.Models
         private readonly CompositeDisposable _subscriptions = new CompositeDisposable();
         private readonly CompositeDisposable _loadedSubscriptions = new CompositeDisposable();
 
-        protected BaseViewModel()
+        protected BaseViewModel(CoreDispatcher dispatcher = null)
+            : base (dispatcher)
         {
             _localValues = new ObservableValues(__globalValues, OnDesignTimePropertyRequested);
-        }
-
-        protected BaseViewModel(CoreDispatcher dispatcher)
-            : base(dispatcher)
-        {
-            _localValues = new ObservableValues(__globalValues);
-        }
-
-        protected BaseViewModel(BaseViewModel parent)
-            : this()
-        {
-            parent.AddChild(this);
         }
 
         protected CompositeDisposable LoadedSubscriptions
@@ -69,9 +58,8 @@ namespace slimCODE.Models
         }
 
         /// <summary>
-        /// Activates this view-model, connecting it with a <see cref="CoreDispatcher"/>.
+        /// Activates this view-model.
         /// </summary>
-        /// <param name="dispatcher"></param>
         public void Activate(CoreDispatcher dispatcher)
         {
             this.Dispatcher = dispatcher;
@@ -139,8 +127,11 @@ namespace slimCODE.Models
         /// <param name="childViewModel"></param>
         /// <returns></returns>
         public TViewModel AddChild<TViewModel>(TViewModel childViewModel)
-            where TViewModel : BaseViewModel
+            where TViewModel : BaseChildViewModel
         {
+            // Note: We cannot rely on injecting the dispatcher here, as that child view-model
+            //       is already constructed, and probably already created other stuff dispatcher-dependant.
+
             childViewModel.Subscriptions.Add(
                 this.AddTrigger(
                     ViewModelState.Loaded,
@@ -162,7 +153,7 @@ namespace slimCODE.Models
         /// <param name="propertyName"></param>
         /// <returns></returns>
         public TViewModel AddChildProperty<TViewModel>(string name, TViewModel childViewModel)
-            where TViewModel : BaseViewModel
+            where TViewModel : BaseChildViewModel
         {
             // Note: Though this could have been implemented as a simple extension, I prefer to keep this
             //       local, in case there's any specificities later.

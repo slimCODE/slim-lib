@@ -11,9 +11,10 @@ using slimCODE.Models;
 
 namespace Seclusion.Models
 {
-    public class LandViewModel : BaseViewModel
+    public class LandViewModel : BaseChildViewModel
     {
-        public LandViewModel(Func<IObservable<Unit>> untapAllSelector)
+        public LandViewModel(Func<IObservable<Unit>> untapAllSelector, BaseViewModel parent)
+            : base (parent)
         {
             this.IsTappedObservable = this.CreateActiveProperty<bool>(
                 "IsTapped",

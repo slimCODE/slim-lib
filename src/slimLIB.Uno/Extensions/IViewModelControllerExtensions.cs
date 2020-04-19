@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using slimCODE.Models;
 using slimCODE.Views;
+using Windows.UI.Core;
 
 namespace slimCODE.Extensions
 {
@@ -23,7 +24,7 @@ namespace slimCODE.Extensions
         public static void RegisterViewModel<TPage, TViewModel>(this IViewModelController controller)
             where TViewModel : BaseViewModel, new()
         {
-            controller.RegisterViewModel(typeof(TPage), () => new TViewModel());
+            controller.RegisterViewModel(typeof(TPage), dispatcher => new TViewModel());
         }
 
         // TODO: Remove this once we fully use IServiceProvider
@@ -34,7 +35,7 @@ namespace slimCODE.Extensions
         /// <typeparam name="TPage"></typeparam>
         /// <typeparam name="TViewModel"></typeparam>
         /// <param name="controller"></param>
-        public static void RegisterViewModel<TPage, TViewModel>(this IViewModelController controller, Func<TViewModel> viewModelBuilder)
+        public static void RegisterViewModel<TPage, TViewModel>(this IViewModelController controller, Func<CoreDispatcher, TViewModel> viewModelBuilder)
             where TViewModel : BaseViewModel
         {
             controller.RegisterViewModel(typeof(TPage), viewModelBuilder);

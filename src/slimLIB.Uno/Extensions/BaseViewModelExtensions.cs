@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reactive;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -100,18 +101,27 @@ namespace slimCODE.Extensions
 
         /// <summary>
         /// Creates an <see cref="IObservableCommand{T}"/> available via data binding, with support for <see cref="System.Windows.Input.ICommand.CanExecute"/>
-        /// via an <see cref="IObservable{Boolean}"/>.
+        /// via an <see cref="IObservable{Boolean}"/>. You can optionally expose that observable via a "Can" + name property as well.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="viewModel"></param>
         /// <param name="name"></param>
         /// <param name="canExecuteObservable"></param>
+        /// <param name="includeCanProperty"></param>
         /// <returns></returns>
-        public static IObservableCommand<T> CreateObservableCommand<T>(this BaseViewModel viewModel, string name, IObservable<bool> canExecuteObservable)
+        public static IObservableCommand<T> CreateObservableCommand<T>(
+            this BaseViewModel viewModel, 
+            string name, 
+            IObservable<bool> canExecuteObservable, 
+            bool includeCanProperty = false)
         {
             var observableValue = new ObservableValue<IObservableCommand<T>>(new ObservableCommand<T>(canExecuteObservable));
-
             viewModel.AddProperty<IObservableCommand<T>>(name, observableValue);
+
+            if (includeCanProperty)
+            {
+                viewModel.CreateProperty($"Can{name}", () => canExecuteObservable, true);
+            }
 
             return observableValue.Latest;
         }
@@ -126,7 +136,11 @@ namespace slimCODE.Extensions
         /// <param name="canExecuteFunc"></param>
         /// <param name="canExecuteChangedObservable"></param>
         /// <returns></returns>
-        public static IObservableCommand<T> CreateObservableCommand<T>(this BaseViewModel viewModel, string name, Func<T, bool> canExecuteFunc, IObservable<Unit> canExecuteChangedObservable = null)
+        public static IObservableCommand<T> CreateObservableCommand<T>(
+            this BaseViewModel viewModel, 
+            string name, 
+            Func<T, bool> canExecuteFunc, 
+            IObservable<Unit> canExecuteChangedObservable = null)
         {
             var observableValue = new ObservableValue<IObservableCommand<T>>(new ObservableCommand<T>(canExecuteFunc, canExecuteChangedObservable));
 

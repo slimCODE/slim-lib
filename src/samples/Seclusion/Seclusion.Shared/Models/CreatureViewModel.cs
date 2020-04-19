@@ -10,13 +10,14 @@ using slimCODE.Models;
 
 namespace Seclusion.Models
 {
-    public class CreatureViewModel : BaseViewModel
+    public class CreatureViewModel : BaseChildViewModel
     {
         private readonly IObservableValue<int> _power;
         private readonly IObservableValue<int> _toughness;
         private readonly IObservableValue<Ability[]> _abilities;
 
-        public CreatureViewModel(IObservable<Unit> untapAll, int power, int toughness, params Ability[] abilities)
+        public CreatureViewModel(IObservable<Unit> untapAll, int power, int toughness, BaseViewModel parent, params Ability[] abilities)
+            : base (parent)
         {
             _power = this.CreateProperty("Power", power);
             _toughness = this.CreateProperty("Toughness", toughness);
