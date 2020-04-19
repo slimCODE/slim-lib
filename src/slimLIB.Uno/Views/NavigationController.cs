@@ -102,7 +102,8 @@ namespace slimCODE.Views
                 .SelectManyCancelPrevious(tuples => tuples
                     .Select(tuple => tuple.Item1.Select(isPreventingBack => isPreventingBack ? tuple.Item2 : null))
                     .CombineLatest())
-                .Select(interceptors => interceptors.WhereNotNull().ToArray())
+                .StartWith(default(IList<Func<CancellationToken, Task>>))
+                .Select(interceptors => interceptors.OrEmpty().WhereNotNull().ToArray())
                 // TODO: A SelectManyCancelPrevious with IObservable would look better.
                 .Select(interceptors => manager
                     .ObserveBackRequested()

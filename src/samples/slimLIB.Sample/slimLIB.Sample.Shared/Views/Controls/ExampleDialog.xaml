@@ -1,0 +1,22 @@
+﻿<ContentDialog
+    x:Class="slimLIB.Sample.Views.Controls.ExampleDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:slimLIB.Sample.Views.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="Dialog Example 1"
+    PrimaryButtonText="Good"
+    SecondaryButtonText="Fine"
+    CloseButtonText="Whatever"
+    PrimaryButtonCommand="{Binding [GoodCommand]}"
+    SecondaryButtonCommand="{Binding [FineCommand]}"
+    CloseButtonCommand="{Binding [WhateverCommand]}">
+
+    <StackPanel>
+        <TextBlock>This is a very simple example of how to open a content dialog from your view-model.</TextBlock>
+        <TextBlock>You should always build your dialogs in XAML, not in code. That's the best way to localize them.</TextBlock>
+        <TextBlock HorizontalAlignment="Center" FontSize="36" Text="{Binding [Countdown]}" />
+    </StackPanel>
+</ContentDialog>

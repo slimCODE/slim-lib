@@ -18,62 +18,22 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Models\DialogExamplesViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\ExampleDialogViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\MainPageViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\MessagingAndDialogExamplesPageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\MessageAndDialogExamplesPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\INumbersApi.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\ActivePropertyExamplesPage.xaml.cs">
-      <DependentUpon>$fileinputname$.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Views\BehaviorExamplesPage.xaml.cs">
-      <DependentUpon>$fileinputname$.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Views\CollectionPropertyExamplesPage.xaml.cs">
-      <DependentUpon>$fileinputname$.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Views\ConverterExamplesPage.xaml.cs">
-      <DependentUpon>$fileinputname$.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Views\DialogExamplesPage.xaml.cs">
-      <DependentUpon>$fileinputname$.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Controls\ExampleDialog.xaml.cs">
+      <DependentUpon>ExampleDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Views\MessagingExamplesPage.xaml.cs">
-      <DependentUpon>$fileinputname$.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Views\NavigationExamplesPage.xaml.cs">
-      <DependentUpon>$fileinputname$.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Views\ObservableCommandExamplesPage.xaml.cs">
-      <DependentUpon>$fileinputname$.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Views\PropertyExamplesPage.xaml.cs">
-      <DependentUpon>$fileinputname$.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Views\SelectionPage.xaml.cs">
+    <Compile Include="$(MSBuildThisFileDirectory)Views\MessageAndDialogExamplesPage.xaml.cs">
       <DependentUpon>$fileinputname$.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="$(MSBuildThisFileDirectory)Views\ActivePropertyExamplesPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Views\BehaviorExamplesPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Views\CollectionPropertyExamplesPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Views\ConverterExamplesPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Views\DialogExamplesPage.xaml">
+    <Page Include="$(MSBuildThisFileDirectory)Views\Controls\ExampleDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -81,23 +41,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Views\MessagingExamplesPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Views\NavigationExamplesPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Views\ObservableCommandExamplesPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Views\PropertyExamplesPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Views\SelectionPage.xaml">
+    <Page Include="$(MSBuildThisFileDirectory)Views\MessageAndDialogExamplesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

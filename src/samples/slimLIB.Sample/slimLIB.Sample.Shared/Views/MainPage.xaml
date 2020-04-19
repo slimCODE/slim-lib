@@ -30,6 +30,9 @@
 
     <Page.BottomAppBar>
         <CommandBar>
+            <AppBarButton Icon="Caption"
+						  Label="Dialogs"
+						  Command="{Binding [ShowMessageAndDialogCommand]}" />
             <AppBarButton Icon="Bullets"
 						  Label="numbers"
 						  Command="{Binding [TestNumbers]}" />

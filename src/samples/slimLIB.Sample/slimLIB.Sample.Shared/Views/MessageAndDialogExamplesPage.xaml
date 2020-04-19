@@ -1,0 +1,23 @@
+﻿<Page
+    x:Class="slimLIB.Sample.Views.MessageAndDialogExamplesPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:slimLIB.Sample.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:slimb="using:slimCODE.Views.Behaviors"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid slimb:GridHelper.Columns="*,*,*" slimb:GridHelper.Rows="*,*,*">
+        <TextBlock>Good</TextBlock>
+        <TextBlock Grid.Column="1">Fine</TextBlock>
+        <TextBlock Grid.Column="2">Whatever</TextBlock>
+
+        <TextBlock Grid.Row="1" Text="{Binding [Example][GoodCount]}" />
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding [Example][FineCount]}" />
+        <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding [Example][WhateverCount]}" />
+
+        <Button Grid.Row="2" Grid.ColumnSpan="3" Command="{Binding [DialogExampleCommand]}">Show Dialog</Button>
+    </Grid>
+</Page>

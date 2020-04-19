@@ -7,19 +7,35 @@ using System.Threading;
 using System.Threading.Tasks;
 using slimCODE.Extensions;
 using slimCODE.Models;
+using slimCODE.Views;
+using slimLIB.Sample.Views;
 
 namespace slimLIB.Sample.Models
 {
     public class MainPageViewModel : BaseViewModel
     {
-        public MainPageViewModel()
+        private INavigationController _navigation;
+
+        public MainPageViewModel(INavigationController navigation)
         {
+            _navigation = navigation;
+
+            this.CreateCommand("ShowMessageAndDialogCommand", this.ShowMessageAndDialog);
+
+            // TODO: Remove below
             var clearCommand = this.CreateObservableCommand("ClearCommand");
-            var testNumbersCommand = this.CreateObservableCommand("TestNumbers");
+            var testNumbersCommand = this.CreateObservableCommand("TestNumbers");            
 
             this.CreateProperty<string>("Name", () => ObserveName(clearCommand));
             this.CreateProperty<string>("Number", () => ObserveNumber(testNumbersCommand));
         }
+
+        private async Task ShowMessageAndDialog(CancellationToken ct)
+        {
+            _navigation.Navigate<MessageAndDialogExamplesPage>();
+        }
+
+        // TODO: Remove below
 
         private IObservable<string> ObserveName(IObservableCommand<Unit> clearObservable)
         {

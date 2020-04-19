@@ -22,7 +22,8 @@ namespace slimCODE.Extensions
                 .FromEventPattern<BackRequestedEventArgs>(
                     h => manager.BackRequested += h,
                     h => manager.BackRequested -= h)
-                .Select(ep => ep.EventArgs);
+                .Select(ep => ep.EventArgs)
+                .Do(args => System.Diagnostics.Debug.WriteLine("Back?"));
         }
     }
 }

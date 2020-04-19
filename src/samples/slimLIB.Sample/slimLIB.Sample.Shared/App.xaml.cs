@@ -20,6 +20,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using slimLIB.Sample.Views;
+using slimLIB.Sample.Views.Controls;
 
 namespace slimLIB.Sample
 {
@@ -39,9 +40,8 @@ namespace slimLIB.Sample
 
         protected override void OnRegisterViewModels(IViewModelController viewModels)
         {
-            viewModels.RegisterViewModel<MainPage, Models.MainPageViewModel>();
-            // TODO
-            // viewModels.RegisterViewModel<YesNoSampleDialog, Models.YesNoSampleDialogViewModel>();
+            viewModels.RegisterViewModel<MainPage, Models.MainPageViewModel>(() => new Models.MainPageViewModel(_hack));
+            viewModels.RegisterViewModel<MessageAndDialogExamplesPage, Models.MessageAndDialogExamplesPageViewModel>();
 
             // Just an example of global properties
             BaseViewModelExtensions.CreateGlobalProperty(
@@ -50,10 +50,17 @@ namespace slimLIB.Sample
                     .Timer(TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1))
                     .Select(_ => DateTimeOffset.Now.ToString()),
                 "-");
+
+            // Dialogs must also be registered by name.
+            // TODO: It's wrong to be there, and be on extensions.
+            BaseViewModelExtensions.RegisterDialog<ExampleDialog>("ExampleDialog");
         }
+
+        private INavigationController _hack;
 
         protected override void OnInitialNavigation(LaunchActivatedEventArgs args, INavigationController navigation)
         {
+            _hack = navigation;
             navigation.Navigate(typeof(MainPage));
         }
     }

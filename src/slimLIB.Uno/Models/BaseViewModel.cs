@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using slimCODE.Extensions;
 using Windows.UI.Core;
+using Windows.UI.Xaml;
 
 namespace slimCODE.Models
 {
@@ -56,6 +57,15 @@ namespace slimCODE.Models
         protected CompositeDisposable Subscriptions
         {
             get { return _subscriptions; }
+        }
+
+        /// <summary>
+        /// Observes the state of this view-model.
+        /// </summary>
+        /// <returns></returns>
+        public IObservable<ViewModelState> ObserveState()
+        {
+            return _state.AsObservable();
         }
 
         /// <summary>
@@ -123,7 +133,7 @@ namespace slimCODE.Models
         }
 
         /// <summary>
-        /// Adds a view-model as a child of this view-model. Its becomes connected to the parent state.
+        /// Adds a view-model as a child of this view-model. It becomes connected to the parent state.
         /// </summary>
         /// <typeparam name="TViewModel"></typeparam>
         /// <param name="childViewModel"></param>
@@ -140,6 +150,23 @@ namespace slimCODE.Models
                 this.AddTrigger(
                     ViewModelState.Unloaded,
                     () => childViewModel.Deactivate()));
+
+            return childViewModel;
+        }
+
+        /// <summary>
+        /// Adds a view-model as a child of this view-model, and exposes it data-binding as a property.
+        /// </summary>
+        /// <typeparam name="TViewModel"></typeparam>
+        /// <param name="childViewModel"></param>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
+        public TViewModel AddChildProperty<TViewModel>(string name, TViewModel childViewModel)
+            where TViewModel : BaseViewModel
+        {
+            // Note: Though this could have been implemented as a simple extension, I prefer to keep this
+            //       local, in case there's any specificities later.
+            this.AddProperty(name, new ObservableValue<TViewModel>(this.AddChild(childViewModel)));
 
             return childViewModel;
         }

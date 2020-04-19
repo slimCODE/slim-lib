@@ -77,5 +77,16 @@ namespace slimCODE.Extensions
                 action(item);
             }
         }
+
+        /// <summary>
+        /// Returns the enumerable if it's not null, or an empty enumerable.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="enumerable"></param>
+        /// <returns></returns>
+        public static IEnumerable<T> OrEmpty<T>(this IEnumerable<T> enumerable)
+        {
+            return enumerable ?? Enumerable.Empty<T>();
+        }
     }
 }

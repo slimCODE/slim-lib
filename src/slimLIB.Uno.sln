@@ -30,12 +30,14 @@ EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		samples\slimLIB.Sample\slimLIB.Sample.Shared\slimLIB.Sample.Shared.projitems*{27c4e1e5-b770-4e89-967f-33ee95a30cf0}*SharedItemsImports = 4
+		samples\slimLIB.Sample\slimLIB.Sample.Shared\slimLIB.Sample.Shared.projitems*{52a8d626-9752-4a02-8efa-2cc92e0098c6}*SharedItemsImports = 5
 		samples\slimLIB.Sample\slimLIB.Sample.Shared\slimLIB.Sample.Shared.projitems*{6279c845-92f8-4333-ab99-3d213163593c}*SharedItemsImports = 13
 		samples\Seclusion\Seclusion.Shared\Seclusion.Shared.projitems*{668828f4-24a0-4936-8a36-1b0aed9b2b58}*SharedItemsImports = 4
 		samples\Seclusion\Seclusion.Shared\Seclusion.Shared.projitems*{6a2c7da3-7096-4ea0-93d3-5c56000e08e2}*SharedItemsImports = 4
 		samples\Seclusion\Seclusion.Shared\Seclusion.Shared.projitems*{9717d659-6a42-43d7-8dd4-8fb2179e0d7b}*SharedItemsImports = 13
 		samples\slimLIB.Sample\slimLIB.Sample.Shared\slimLIB.Sample.Shared.projitems*{c39e4269-1399-438f-8795-cd43ce938e8c}*SharedItemsImports = 4
 		samples\Seclusion\Seclusion.Shared\Seclusion.Shared.projitems*{caf29b47-c2ea-4424-9a93-0eabf141ad2f}*SharedItemsImports = 4
+		samples\Seclusion\Seclusion.Shared\Seclusion.Shared.projitems*{cc5eba94-ebab-46f5-a4dc-774c0febcc67}*SharedItemsImports = 5
 		samples\slimLIB.Sample\slimLIB.Sample.Shared\slimLIB.Sample.Shared.projitems*{f4796c43-2d72-41d8-93ff-d0f65ddbd2e1}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
