@@ -40,7 +40,8 @@ namespace slimLIB.Sample
 
         protected override void OnRegisterViewModels(IViewModelController viewModels)
         {
-            viewModels.RegisterViewModel<MainPage, Models.MainPageViewModel>(_ => new Models.MainPageViewModel(_hack));
+            viewModels.RegisterViewModel<MainPage, Models.MainPageViewModel>();
+            viewModels.RegisterViewModel<GettingStartedPage, Models.GettingStartedPageViewModel>();
             viewModels.RegisterViewModel<MessageAndDialogExamplesPage, Models.MessageAndDialogExamplesPageViewModel>();
 
             // Just an example of global properties
@@ -56,11 +57,8 @@ namespace slimLIB.Sample
             BaseViewModelExtensions.RegisterDialog<ExampleDialog>("ExampleDialog");
         }
 
-        private INavigationController _hack;
-
         protected override void OnInitialNavigation(LaunchActivatedEventArgs args, INavigationController navigation)
         {
-            _hack = navigation;
             navigation.Navigate(typeof(MainPage));
         }
     }

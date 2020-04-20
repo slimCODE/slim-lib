@@ -32,7 +32,14 @@ namespace slimCODE.Applications
                 .UseContentRoot(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData))
                 .ConfigureServices((context, services) => this.ConfigureServices(context.Configuration, services))
                 .Build();
+
+            SlimApplication.Services = _host.Services;
         }
+
+        /// <summary>
+        /// Gets the main service provider. Useful for UI components that require access to services.
+        /// </summary>
+        public static IServiceProvider Services { get; private set; }
 
         /// <summary>
         /// Override to provide the initial navigation for your application.
@@ -67,7 +74,7 @@ namespace slimCODE.Applications
         {
             // Not required, fails on Android
             // _host.Start();
-                 
+
             base.OnLaunched(args);
 
             EnsureRootFrameCreated(args);

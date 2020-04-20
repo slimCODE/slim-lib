@@ -23,12 +23,15 @@ namespace slimCODE.Views
         private readonly Subject<Tuple<IObservable<bool>, Func<CancellationToken, Task>>> _addedInterceptors = new Subject<Tuple<IObservable<bool>, Func<CancellationToken, Task>>>();
         private readonly Subject<Tuple<IObservable<bool>, Func<CancellationToken, Task>>> _removedInterceptors = new Subject<Tuple<IObservable<bool>, Func<CancellationToken, Task>>>();
 
+        private readonly bool _preventAppViewBackButton;
+
         private Frame _frame;
         private SystemNavigationManager _navigationManager;
 
-        public NavigationController(IViewModelController viewModelController)
+        public NavigationController(IViewModelController viewModelController, bool preventAppViewBackButton = false)
         {
             _viewModelController = viewModelController;
+            _preventAppViewBackButton = preventAppViewBackButton;
         }
 
         public void ConnectWithFrame(Frame rootFrame)
@@ -83,6 +86,7 @@ namespace slimCODE.Views
             return frame
                 .ObserveNavigated()
                 .SelectManyCancelPrevious((ct, args) => UpdateViewModel(ct, args.Content as FrameworkElement, args.NavigationMode, args.Parameter))
+                .Where(_ => !_preventAppViewBackButton)
                 .SelectManyCancelPrevious((ct, _) =>
                     frame
                         .Dispatcher

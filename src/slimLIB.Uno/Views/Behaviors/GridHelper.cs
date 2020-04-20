@@ -38,7 +38,6 @@ namespace slimCODE.Views.Behaviors
                 {
                     grid.ColumnDefinitions.Add(definition);
                 }
-
             }
         }
 

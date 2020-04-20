@@ -9,62 +9,40 @@ using slimCODE.Extensions;
 using slimCODE.Models;
 using slimCODE.Views;
 using slimLIB.Sample.Views;
+using Windows.UI.Xaml.Controls;
 
 namespace slimLIB.Sample.Models
 {
     public class MainPageViewModel : BaseViewModel
     {
-        private INavigationController _navigation;
+        private IObservableValue<INavigationController> _navigationValue;
 
-        public MainPageViewModel(INavigationController navigation)
+        public MainPageViewModel()
         {
-            _navigation = navigation;
+            _navigationValue = this.CreateProperty<INavigationController>("NavigationController");
 
-            this.CreateCommand("ShowMessageAndDialogCommand", this.ShowMessageAndDialog);
+            this.Subscriptions.Add(_navigationValue.WhereNotNull().Subscribe(navigation => navigation.Navigate<GettingStartedPage>()));
 
-            // TODO: Remove below
-            var clearCommand = this.CreateObservableCommand("ClearCommand");
-            var testNumbersCommand = this.CreateObservableCommand("TestNumbers");            
-
-            this.CreateProperty<string>("Name", () => ObserveName(clearCommand));
-            this.CreateProperty<string>("Number", () => ObserveNumber(testNumbersCommand));
+            this.CreateCommand<NavigationViewSelection>("NavigationCommand", this.Navigate);
         }
 
-        private async Task ShowMessageAndDialog(CancellationToken ct)
+        private async Task Navigate(CancellationToken ct, NavigationViewSelection selection)
         {
-            _navigation.Navigate<MessageAndDialogExamplesPage>();
-        }
+            var navigation = _navigationValue.Latest;
 
-        // TODO: Remove below
+            if (navigation != null)
+            {
+                switch (selection.Tag)
+                {
+                    case "GettingStarted":
+                        navigation.Navigate<GettingStartedPage>();
+                        break;
 
-        private IObservable<string> ObserveName(IObservableCommand<Unit> clearObservable)
-        {
-            return clearObservable
-                .Select(_ => "")
-                .StartWith("");
-        }
-
-        private IObservable<string> ObserveNumber(IObservableCommand<Unit> testNumbersObservable)
-        {
-            return testNumbersObservable
-                .SelectManyCancelPrevious((ct, _) => GetNumberFact(ct));
-        }
-
-        private async Task<string> GetNumberFact(CancellationToken ct)
-        {
-            /*
-            var client = new NumbersClient();
-
-            var responses = await Task.WhenAll(
-                client.GetRandomFact(ct),
-                client.GetNumberFact(ct, 45),
-                client.GetDateFact(ct, 3, 1971),
-                client.GetYearFact(ct, 2002));
-
-            return string.Join("\n", responses.Select(r => r.Entity.Text));
-            */
-            // TODO: Replace with Refit!
-            return "TODO 42!";
+                    case "MessagesAndDialogs":
+                        navigation.Navigate<MessageAndDialogExamplesPage>();
+                        break;
+                }
+            }
         }
     }
 }
