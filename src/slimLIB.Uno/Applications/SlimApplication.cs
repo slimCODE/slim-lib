@@ -29,7 +29,7 @@ namespace slimCODE.Applications
         {
             _host = new HostBuilder()
                 // TODO: This path is not good, but we don't really care for now.
-                .UseContentRoot(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData))
+                // .UseContentRoot(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData))
                 .ConfigureServices((context, services) => this.ConfigureServices(context.Configuration, services))
                 .Build();
 
