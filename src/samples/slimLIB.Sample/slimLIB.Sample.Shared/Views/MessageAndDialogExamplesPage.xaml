@@ -9,15 +9,20 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid slimb:GridHelper.Columns="*,*,*" slimb:GridHelper.Rows="*,*,*">
-        <TextBlock>Good</TextBlock>
-        <TextBlock Grid.Column="1">Fine</TextBlock>
-        <TextBlock Grid.Column="2">Whatever</TextBlock>
+    <StackPanel Margin="24" HorizontalAlignment="Left">
+        <TextBlock Style="{ThemeResource HeaderTextBlockStyle}">Dialog Example</TextBlock>
+        <Grid slimb:GridHelper.Columns="*,*,*" slimb:GridHelper.Rows="*,*" MaxWidth="200" Margin="0,12" HorizontalAlignment="Left">
+            <TextBlock Margin="12,0">Good</TextBlock>
+            <TextBlock Margin="12,0" Grid.Column="1">Fine</TextBlock>
+            <TextBlock Margin="12,0" Grid.Column="2">Whatever</TextBlock>
 
-        <TextBlock Grid.Row="1" Text="{Binding [Example][GoodCount]}" />
-        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding [Example][FineCount]}" />
-        <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding [Example][WhateverCount]}" />
-
+            <TextBlock Grid.Row="1" Text="{Binding [Example][GoodCount]}" />
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding [Example][FineCount]}" />
+            <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding [Example][WhateverCount]}" />
+        </Grid>
         <Button Grid.Row="2" Grid.ColumnSpan="3" Command="{Binding [DialogExampleCommand]}">Show Dialog</Button>
-    </Grid>
+
+        <TextBlock Style="{ThemeResource HeaderTextBlockStyle}" Margin="0,24,0,0">Message Example</TextBlock>
+        <Button Grid.Row="2" Grid.Column="3" Command="{Binding [MessageExampleCommand]}">Show Message</Button>
+    </StackPanel>
 </Page>

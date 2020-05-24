@@ -8,8 +8,8 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <StackPanel>
-        <TextBlock Style="{ThemeResource HeaderTextBlockStyle}">slimLIB for Uno</TextBlock>
-        <TextBlock Style="{ThemeResource BodyTextBlockStyle}">Welcome to the slimLIB sample.</TextBlock>
+    <StackPanel Margin="24">
+        <TextBlock Style="{ThemeResource HeaderTextBlockStyle}">Getting started with slimLIB for Uno</TextBlock>
+        <TextBlock Style="{ThemeResource BodyTextBlockStyle}">Welcome to the slimLIB sample. This sample is still in progress.</TextBlock>
     </StackPanel>
 </Page>
